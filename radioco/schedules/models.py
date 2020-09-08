@@ -21,9 +21,6 @@ from django.utils.translation import ugettext_lazy as _
 from recurrence.fields import RecurrenceField
 
 from radioco.programmes.models import Episode, Programme
-from radioco.schedules import recurrence
-
-recurrence.patch()
 
 
 class Slot(models.Model):

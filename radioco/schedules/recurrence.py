@@ -1,6 +1,6 @@
 from pytz.exceptions import NonExistentTimeError
+from recurrence import Recurrence
 import datetime
-import recurrence
 
 from django.utils import timezone
 
@@ -26,6 +26,9 @@ def init(self, *args, **kwargs):
                           self.dtstart.tzinfo))
     self.rdates = [fix_date(dt) for dt in self.rdates]
     self.exdates = [fix_date(dt) for dt in self.exdates]
+
+    if self.dtstart and timezone.is_aware(self.dtstart):
+        self.dtstart = timezone.make_naive(self.dtstart)
 
 
 def before(self, dt, **kwargs):
@@ -63,11 +66,11 @@ def between(self, after, before, **kwargs):
 
 
 def patch():
-    recurrence.Recurrence.___init__ = recurrence.Recurrence.__init__
-    recurrence.Recurrence.__init__ = init
-    recurrence.Recurrence._before = recurrence.Recurrence.before
-    recurrence.Recurrence.before = before
-    recurrence.Recurrence._after = recurrence.Recurrence.after
-    recurrence.Recurrence.after = after
-    recurrence.Recurrence._between = recurrence.Recurrence.between
-    recurrence.Recurrence.between = between
+    Recurrence.___init__ = Recurrence.__init__
+    Recurrence.__init__ = init
+    Recurrence._before = Recurrence.before
+    Recurrence.before = before
+    Recurrence._after = Recurrence.after
+    Recurrence.after = after
+    Recurrence._between = Recurrence.between
+    Recurrence.between = between

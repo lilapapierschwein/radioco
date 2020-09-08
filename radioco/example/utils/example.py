@@ -54,11 +54,11 @@ def create_example_data():
         programme=programme, runtime=datetime.timedelta(minutes=60))
 
     recurrences = recurrence.Recurrence(
-        dtstart=timezone.make_aware(datetime.datetime(2015, 1, 1, 8, 0, 0)),
+        dtstart=datetime.datetime(2015, 1, 1, 8, 0, 0),
         rrules=[recurrence.Rule(recurrence.DAILY)])
 
     recurrences_repetition = recurrence.Recurrence(
-        dtstart=timezone.make_aware(datetime.datetime(2015, 1, 1, 20, 0, 0)),
+        dtstart=datetime.datetime(2015, 1, 1, 20, 0, 0),
         rrules=[recurrence.Rule(recurrence.DAILY)])
 
     Schedule.objects.get_or_create(
@@ -123,9 +123,8 @@ def create_example_data():
             programme=programme, runtime=datetime.timedelta(minutes=60))
 
         recurrences = recurrence.Recurrence(
-            dtstart=(
-                timezone.make_aware(datetime.datetime(2015, 1, 1, 10, 0, 0)) +
-                datetime.timedelta(hours=programme_counter)),
+            dtstart=(datetime.datetime(2015, 1, 1, 10, 0, 0) +
+                     datetime.timedelta(hours=programme_counter)),
             rrules=[recurrence.Rule(recurrence.DAILY)])
 
         Schedule.objects.get_or_create(
