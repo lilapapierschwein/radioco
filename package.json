@@ -7,7 +7,9 @@
     "url": "https://github.com/RadioCorax/radioco"
   },
   "dependencies": {
-    "fullcalendar": "3.9.0",
-    "jqueryui": "1.11.1"
+    "fullcalendar": "3.10.2",
+    "jquery": "2 - 3",
+    "jqueryui": "1.11.1",
+    "moment": "^2.20.1"
   }
 }
