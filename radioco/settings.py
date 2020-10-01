@@ -16,20 +16,9 @@
 
 
 import os
-import warnings
 
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 SITE_ROOT = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
-
-##################################################################################
-# To override this settings create a "local_settings.py" file in same location.  #
-# RadioCo Settings                                                               #
-# http://django-radio.readthedocs.org/en/latest/reference/configuration.html     #
-##################################################################################
-
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = '(h_$1pj(&usx%kw^m6$7*x9pnar+t_136g!3)g#+eje5r^3(!+'
@@ -145,14 +134,48 @@ STATICFILES_FINDERS = (
 FILEBROWSER_URL_FILEBROWSER_MEDIA = STATIC_URL + "filebrowser/"
 FILEBROWSER_PATH_FILEBROWSER_MEDIA = os.path.join(STATIC_URL, 'filebrowser/')
 FILEBROWSER_VERSIONS = {
-    'admin_thumbnail': {'verbose_name': 'Admin Thumbnail', 'width': 60, 'height': 60, 'opts': 'crop'},
-    'thumbnail': {'verbose_name': 'Thumbnail (1 col)', 'width': 60, 'height': 60, 'opts': 'crop'},
-    'small': {'verbose_name': 'Small (2 col)', 'width': 140, 'height': '', 'opts': ''},
-    'medium': {'verbose_name': 'Medium (4col )', 'width': 300, 'height': '', 'opts': ''},
-    'big': {'verbose_name': 'Big (6 col)', 'width': 460, 'height': '', 'opts': ''},
-    'large': {'verbose_name': 'Large (8 col)', 'width': 680, 'height': '', 'opts': ''},
-
-    'item_overlap': {'verbose_name': 'Big (6 col)', 'width': 600, 'height': 450, 'opts': 'crop upscale'},
+    'admin_thumbnail': {
+        'verbose_name': 'Admin Thumbnail',
+        'width': 60,
+        'height': 60,
+        'opts': 'crop'
+    },
+    'thumbnail': {
+        'verbose_name': 'Thumbnail (1 col)',
+        'width': 60,
+        'height': 60,
+        'opts': 'crop'
+    },
+    'small': {
+        'verbose_name': 'Small (2 col)',
+        'width': 140,
+        'height': '',
+        'opts': ''
+    },
+    'medium': {
+        'verbose_name': 'Medium (4col )',
+        'width': 300,
+        'height': '',
+        'opts': ''
+    },
+    'big': {
+        'verbose_name': 'Big (6 col)',
+        'width': 460,
+        'height': '',
+        'opts': ''
+    },
+    'large': {
+        'verbose_name': 'Large (8 col)',
+        'width': 680,
+        'height': '',
+        'opts': ''
+    },
+    'item_overlap': {
+        'verbose_name': 'Big (6 col)',
+        'width': 600,
+        'height': 450,
+        'opts': 'crop upscale'
+    },
 }
 FILEBROWSER_ADMIN_VERSIONS = [
     'thumb', 'small', 'medium', 'large',
@@ -168,11 +191,10 @@ CKEDITOR_UPLOAD_PATH = "uploads/"
 CKEDITOR_JQUERY_URL = '/'.join([STATIC_URL, 'jquery/dist/jquery.min.js'])
 
 # Available Languages
-gettext_noop = lambda s: s
 PROGRAMME_LANGUAGES = (
-    ('es', gettext_noop('Spanish')),
-    ('en', gettext_noop('English')),
-    ('gl', gettext_noop('Galician')),
+    ('es', 'Spanish'),
+    ('en', 'English'),
+    ('gl', 'Galician'),
 )
 
 # Admin

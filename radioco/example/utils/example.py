@@ -109,7 +109,8 @@ def create_example_data():
         )
 
     # Programme 2 - 5
-    titles = ['', 'Places To Go', 'The best wine', 'Local Gossips', 'Classic hits']
+    titles = [
+        '', 'Places To Go', 'The best wine', 'Local Gossips', 'Classic hits']
     for programme_counter in range(1, 5):
         programme, created = Programme.objects.get_or_create(
             name=titles[programme_counter],

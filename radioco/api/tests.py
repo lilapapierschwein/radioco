@@ -23,12 +23,10 @@ from django.test import TestCase
 from django.utils import timezone
 
 from rest_framework import status
-from rest_framework.test import APITestCase, APIRequestFactory
+from rest_framework.test import APITestCase
 
 from radioco.api import serializers
-from radioco.api import views
-from radioco.programmes.models import Programme, Episode
-from radioco.schedules.models import Schedule, Transmission
+from radioco.schedules.models import Transmission
 from radioco.test.utils import TestDataMixin, now
 
 
@@ -111,8 +109,7 @@ class TestAPI(TestDataMixin, APITestCase):
         admin.user_permissions.add(
             Permission.objects.get(codename='change_schedule'))
 
-        someone = User.objects.create_user(
-            username='someone', password='topsecret')
+        User.objects.create_user(username='someone', password='topsecret')
 
     def test_api(self):
         response = self.client.get('/api/2/')
@@ -198,7 +195,7 @@ class TestAPI(TestDataMixin, APITestCase):
     def test_transmissions(self):
         response = self.client.get('/api/2/transmissions')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertTrue(len(response.data)>20)
+        self.assertTrue(len(response.data) > 20)
 
     def test_transmission_after(self):
         response = self.client.get(
@@ -221,7 +218,7 @@ class TestAPI(TestDataMixin, APITestCase):
 
     def test_transmission_before_earlier_than_after(self):
         with self.assertRaises(ValidationError):
-            response = self.client.get(
+            self.client.get(
                 '/api/2/transmissions',
                 dict(
                     after=datetime.datetime(2015, 2, 14, 21, 0).isoformat(),
@@ -229,9 +226,8 @@ class TestAPI(TestDataMixin, APITestCase):
 
     def test_transmission_invalid_input(self):
         with self.assertRaises(ValidationError):
-            response = self.client.get(
-                '/api/2/transmissions',
-                {'after': 'invalid date format'})
+            self.client.get('/api/2/transmissions',
+                            {'after': 'invalid date format'})
 
     @mock.patch(
         'django.utils.timezone.now',

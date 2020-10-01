@@ -7,4 +7,4 @@ from radioco.programmes.models import Programme
 
 @receiver(pre_save, sender=Programme)
 def generate_slug(instance, **kwargs):
-        instance.slug = slugify(instance.name)
+    instance.slug = slugify(instance.name)

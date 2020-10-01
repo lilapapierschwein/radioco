@@ -6,4 +6,3 @@ class Programmes(AppConfig):
 
     def ready(self):
         from radioco.programmes import signals
-

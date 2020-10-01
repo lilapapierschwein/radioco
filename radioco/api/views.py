@@ -3,7 +3,6 @@ import datetime
 from django import forms
 from django.utils import timezone
 from django.core.exceptions import ValidationError
-from django.shortcuts import get_object_or_404
 
 from rest_framework import permissions, viewsets
 from rest_framework.decorators import action
@@ -55,7 +54,7 @@ class TransmissionForm(forms.Form):
         return before
 
     def clean(self):
-        cleaned_data = super().clean()
+        super().clean()
         if self.clean_after() > self.clean_before():
             self.add_error('before', 'must be later than after')
 

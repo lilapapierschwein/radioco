@@ -147,7 +147,7 @@ class EpisodeManager(models.Manager):
             Q(programme=programme) &
             (Q(issue_date__gte=after) | Q(issue_date=None)))
         for episode in episodes.order_by("season", "number_in_season"):
-                yield episode
+            yield episode
 
 
 class Episode(models.Model):
