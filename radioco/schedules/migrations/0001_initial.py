@@ -19,7 +19,9 @@ class Migration(migrations.Migration):
                 ('day', models.IntegerField(choices=[(0, 'Monday'), (1, 'Tuesday'), (2, 'Wednesday'), (3, 'Thursday'), (4, 'Friday'), (5, 'Saturday'), (6, 'Sunday')])),
                 ('start_hour', models.TimeField(verbose_name='start time')),
                 ('type', models.CharField(max_length=1, verbose_name='type', choices=[(b'L', 'live'), (b'B', 'broadcast'), (b'S', 'broadcast syndication')])),
-                ('programme', models.ForeignKey(verbose_name='programme', to='programmes.Programme')),
+                ('programme', models.ForeignKey(on_delete=models.CASCADE,
+                                                verbose_name='programme',
+                                                to='programmes.Programme')),
             ],
             options={
                 'verbose_name': 'schedule',
@@ -44,7 +46,9 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='schedule',
             name='schedule_board',
-            field=models.ForeignKey(verbose_name='schedule board', to='schedules.ScheduleBoard'),
+            field=models.ForeignKey(on_delete=models.CASCADE,
+                                    verbose_name='schedule board',
+                                    to='schedules.ScheduleBoard'),
             preserve_default=True,
         ),
         migrations.AddField(
