@@ -1,9 +1,5 @@
-import datetime
-
-import django.utils.timezone
-
 from radioco.programmes.models import Programme, Episode
-from radioco.schedules.models import Slot, Schedule, Transmission
+from radioco.schedules.models import Slot, Schedule
 from rest_framework import serializers
 
 
@@ -54,7 +50,7 @@ class ScheduleSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Schedule
-        fields = ('id', 'title', 'slot', 'start', 'end', 'type','source')
+        fields = ('id', 'title', 'slot', 'start', 'end', 'type', 'source')
 
     def get_title(self, schedule):
         return schedule.slot.programme.name

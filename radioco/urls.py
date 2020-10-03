@@ -1,5 +1,5 @@
 # Radioco - Broadcasting Radio Recording Scheduling system.
-# Copyright (C) 2014  Iago Veloso Abalo
+# Copyright (C) 2014  Iago Veloso Abalo, Stefan Walluhn
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -16,38 +16,43 @@
 
 
 from django.conf import settings
-from django.conf.urls import include, url
+from django.urls import include, path
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.contrib.auth import views as auth_views
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.utils.translation import ugettext_lazy as _
-from filebrowser.sites import site
+from filebrowser.sites import site as filebrowser_site
 
 admin.site.site_header = _('RadioCo administration')
 admin.site.site_title = _('RadioCo site admin')
 
 
 urlpatterns = [
-    url(r'^grappelli/', include('grappelli.urls')),
-    url(r'^filebrowser/', include(site.urls)),
-    url(r'^ckeditor/', include('ckeditor_uploader.urls')),
+    path('grappelli/', include('grappelli.urls')),
+    path('filebrowser/', filebrowser_site.urls),
+    path('ckeditor/', include('ckeditor_uploader.urls')),
 
-    url(r'^', include(admin.site.urls)),
-    url(r'^password_reset/$', auth_views.password_reset,
-        name='admin_password_reset'),
-    url(r'^password_reset/done/$', auth_views.password_reset_done,
-        name='password_reset_done'),
-    url(r'^password_reset/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',
-        auth_views.password_reset_confirm, name='password_reset_confirm'),
-    url(r'^password_reset/complete/$', auth_views.password_reset_complete,
-        name='password_reset_complete'),
-    url(r'^api/2/', include('radioco.api.urls', namespace="api"))]
+    path('', admin.site.urls),
+    path('password_reset/',
+         auth_views.PasswordResetView.as_view(),
+         name='admin_password_reset'),
+    path('password_reset/done/',
+         auth_views.PasswordResetDoneView.as_view(),
+         name='password_reset_done'),
+    path('reset/<uidb64>/<token>/',
+         auth_views.PasswordResetConfirmView.as_view(),
+         name='password_reset_confirm'),
+    path('reset/done/',
+         auth_views.PasswordResetCompleteView.as_view(),
+         name='password_reset_complete'),
+
+    path('api/2/', include('radioco.api.urls', namespace="api"))]
 
 if settings.DEBUG and 'debug_toolbar' in settings.INSTALLED_APPS:
     import debug_toolbar
 
-    urlpatterns += [url(r'^__debug__/', include(debug_toolbar.urls))]
+    urlpatterns += [path(r'^__debug__/', include(debug_toolbar.urls))]
 
 # Media
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

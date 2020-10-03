@@ -3,10 +3,9 @@ import datetime
 from django import forms
 from django.utils import timezone
 from django.core.exceptions import ValidationError
-from django.shortcuts import get_object_or_404
 
 from rest_framework import permissions, viewsets
-from rest_framework.decorators import list_route
+from rest_framework.decorators import action
 from rest_framework.response import Response
 
 from django_filters.fields import IsoDateTimeField
@@ -55,7 +54,7 @@ class TransmissionForm(forms.Form):
         return before
 
     def clean(self):
-        cleaned_data = super().clean()
+        super().clean()
         if self.clean_after() > self.clean_before():
             self.add_error('before', 'must be later than after')
 
@@ -75,7 +74,7 @@ class TransmissionViewSet(viewsets.GenericViewSet):
             transmissions, many=True, context={'request': request})
         return Response(serializer.data)
 
-    @list_route()
+    @action(detail=False)
     def now(self, request):
         _now = timezone.now()
         transmissions = Transmission.at(_now)

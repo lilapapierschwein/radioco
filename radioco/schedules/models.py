@@ -24,7 +24,8 @@ from radioco.programmes.models import Episode, Programme
 
 
 class Slot(models.Model):
-    programme = models.ForeignKey(Programme, verbose_name=_("programme"))
+    programme = models.ForeignKey(
+        Programme, on_delete=models.CASCADE, verbose_name=_("programme"))
     runtime = models.DurationField(
         verbose_name=_("runtime"), help_text=_("runtime in seconds"))
 
@@ -50,7 +51,8 @@ class Schedule(models.Model):
         verbose_name = _('schedule')
         verbose_name_plural = _('schedules')
 
-    slot = models.ForeignKey(Slot, verbose_name=_("slot"))
+    slot = models.ForeignKey(
+        Slot, on_delete=models.CASCADE, verbose_name=_("slot"))
     type = models.CharField(
         verbose_name=_("type"), choices=SCHEDULE_TYPE, max_length=1)
     recurrences = RecurrenceField(verbose_name=_("recurrences"))

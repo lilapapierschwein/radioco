@@ -17,9 +17,7 @@
 
 import datetime
 import mock
-import pytz
 
-from django.test import TestCase
 from django.utils import timezone
 
 from radioco.programmes.models import Programme

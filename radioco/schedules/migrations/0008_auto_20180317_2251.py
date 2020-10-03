@@ -15,6 +15,13 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='schedule',
             name='type',
-            field=models.CharField(choices=[('L', 'live'), ('B', 'broadcast'), ('S', 'broadcast syndication'), ('R', 'repetition')], max_length=1, verbose_name='type'),
+            field=models.CharField(
+                choices=[
+                    ('L', 'live'),
+                    ('B', 'broadcast'),
+                    ('S', 'broadcast syndication'),
+                    ('R', 'repetition')],
+                max_length=1,
+                verbose_name='type'),
         ),
     ]

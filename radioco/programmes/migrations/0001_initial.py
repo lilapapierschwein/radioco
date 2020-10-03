@@ -47,7 +47,10 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Podcast',
             fields=[
-                ('episode', models.OneToOneField(primary_key=True, serialize=False, to='programmes.Episode')),
+                ('episode', models.OneToOneField(to='programmes.Episode',
+                                                 on_delete=models.CASCADE,
+                                                 primary_key=True,
+                                                 serialize=False)),
                 ('url', models.CharField(max_length=2048)),
                 ('mime_type', models.CharField(max_length=20)),
                 ('length', models.PositiveIntegerField()),
@@ -86,8 +89,12 @@ class Migration(migrations.Migration):
                 ('role', models.CharField(default=b'NO', max_length=2, verbose_name='role', choices=[(b'NO', 'Not specified'), (b'PR', 'Presenter'), (b'IN', 'Informer'), (b'CO', 'Contributor')])),
                 ('description', models.TextField(verbose_name='description', blank=True)),
                 ('date_joined', models.DateField(auto_now_add=True)),
-                ('person', models.ForeignKey(verbose_name='person', to=settings.AUTH_USER_MODEL)),
-                ('programme', models.ForeignKey(verbose_name='programme', to='programmes.Programme')),
+                ('person', models.ForeignKey(on_delete=models.CASCADE,
+                                             verbose_name='person',
+                                             to=settings.AUTH_USER_MODEL)),
+                ('programme', models.ForeignKey(on_delete=models.CASCADE,
+                                                verbose_name='programme',
+                                                to='programmes.Programme')),
             ],
             options={
                 'verbose_name': 'role',
@@ -109,13 +116,17 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='participant',
             name='episode',
-            field=models.ForeignKey(verbose_name='episode', to='programmes.Episode'),
+            field=models.ForeignKey(on_delete=models.CASCADE,
+                                    verbose_name='episode',
+                                    to='programmes.Episode'),
             preserve_default=True,
         ),
         migrations.AddField(
             model_name='participant',
             name='person',
-            field=models.ForeignKey(verbose_name='person', to=settings.AUTH_USER_MODEL),
+            field=models.ForeignKey(on_delete=models.CASCADE,
+                                    verbose_name='person',
+                                    to=settings.AUTH_USER_MODEL),
             preserve_default=True,
         ),
         migrations.AlterUniqueTogether(
@@ -131,7 +142,9 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='episode',
             name='programme',
-            field=models.ForeignKey(verbose_name='programme', to='programmes.Programme'),
+            field=models.ForeignKey(on_delete=models.CASCADE,
+                                    verbose_name='programme',
+                                    to='programmes.Programme'),
             preserve_default=True,
         ),
         migrations.AlterUniqueTogether(
