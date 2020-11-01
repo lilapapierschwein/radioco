@@ -18,9 +18,8 @@
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
-from recurrence.fields import RecurrenceField
-
 from radioco.programmes.models import Episode, Programme
+from radioco.schedules.wrapper import RecurrenceFieldWrapper
 
 
 class Slot(models.Model):
@@ -55,7 +54,7 @@ class Schedule(models.Model):
         Slot, on_delete=models.CASCADE, verbose_name=_("slot"))
     type = models.CharField(
         verbose_name=_("type"), choices=SCHEDULE_TYPE, max_length=1)
-    recurrences = RecurrenceField(verbose_name=_("recurrences"))
+    recurrences = RecurrenceFieldWrapper(verbose_name=_("recurrences"))
     source = models.ForeignKey(
         'self', blank=True, null=True,
         on_delete=models.SET_NULL,
