@@ -33,7 +33,8 @@ urlpatterns = [
     path('filebrowser/', filebrowser_site.urls),
     path('ckeditor/', include('ckeditor_uploader.urls')),
 
-    path('', admin.site.urls),
+    path('api/2/', include('radioco.api.urls', namespace="api")),
+
     path('password_reset/',
          auth_views.PasswordResetView.as_view(),
          name='admin_password_reset'),
@@ -47,7 +48,8 @@ urlpatterns = [
          auth_views.PasswordResetCompleteView.as_view(),
          name='password_reset_complete'),
 
-    path('api/2/', include('radioco.api.urls', namespace="api"))]
+    path('', admin.site.urls),
+]
 
 if settings.DEBUG and 'debug_toolbar' in settings.INSTALLED_APPS:
     import debug_toolbar

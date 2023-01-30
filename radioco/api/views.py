@@ -60,6 +60,7 @@ class TransmissionForm(forms.Form):
 
 
 class TransmissionViewSet(viewsets.GenericViewSet):
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
     serializer_class = serializers.TransmissionSerializer
 
     def list(self, request):
@@ -83,4 +84,5 @@ class TransmissionViewSet(viewsets.GenericViewSet):
         return Response(serializer.data)
 
     def get_queryset(self):
+        # XXX this should return a valid (dummy) QuerySet
         pass

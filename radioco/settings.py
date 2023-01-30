@@ -47,10 +47,10 @@ INSTALLED_APPS = (
 
     # Local Project Apps
     'radioco.api.apps.API',
-    'radioco.users',
+    'radioco.users.apps.Users',
     'radioco.programmes.apps.Programmes',
     'radioco.schedules.apps.Schedules',
-    'radioco.global_settings',
+    'radioco.global_settings.apps.Global_Settings',
     'radioco.example',
 )
 
@@ -129,6 +129,8 @@ STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
     'npm.finders.NpmFinder'
 )
+
+DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 
 # Filebrowser
 FILEBROWSER_URL_FILEBROWSER_MEDIA = STATIC_URL + "filebrowser/"
