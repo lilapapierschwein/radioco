@@ -53,7 +53,7 @@ setup(
         'Topic :: Software Development :: Libraries :: Application Frameworks',
     ],
     install_requires=[
-        'Django=3.2',
+        'Django==3.2',
         'Pillow',
         'django-ckeditor',
         'django-disqus',
