@@ -26,7 +26,7 @@ class Slot(models.Model):
     programme = models.ForeignKey(
         Programme, on_delete=models.CASCADE, verbose_name=_("programme"))
     runtime = models.DurationField(
-        verbose_name=_("runtime"), help_text=_("runtime in seconds"))
+        verbose_name=_("runtime"), help_text=_("runtime in (dd) hh:mm:ss"))
 
     class Meta:
         ordering = ["programme__name"]

@@ -22,7 +22,8 @@ from django.contrib import admin
 @admin.register(Slot)
 class SlotAdmin(admin.ModelAdmin):
     list_display = ('name', 'runtime')
-    list_filter = ('programme__name', 'runtime')
+    # list_filter = ('programme__name', 'runtime')
+    search_fields = ('programme__name',)
 
     def name(self, slot):
         return slot.programme.name

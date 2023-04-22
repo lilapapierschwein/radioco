@@ -49,6 +49,7 @@ class Programme(models.Model):
         verbose_name = _('programme')
         verbose_name_plural = _('programmes')
         permissions = (("see_all_programmes", "Can see all programmes"),)
+        ordering = ["name",]
 
     CATEGORY_CHOICES = (
         ('Arts', _('Arts')),
